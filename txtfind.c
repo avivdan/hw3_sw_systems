@@ -68,7 +68,7 @@ int getLine(char s[LINE])
 {
     char *ptr = &s[0];
     int count = 0;
-    while (*ptr != '\n')
+    while (*ptr != '\n'&& *ptr != '\r')
     {
         count = count + 1;
         ptr = ptr + 1;
@@ -79,7 +79,7 @@ int getword(char w[WORD])
 {
     int count = 0;
     char *ptr = &w[0];
-    while(*ptr != ' '&& *ptr != '\n' && *ptr != '\t' &&  *ptr != '\0')
+    while(*ptr != ' '&& *ptr != '\n' && *ptr != '\t' &&  *ptr != '\0' && *ptr != '\r')
     {
         count = count + 1;
         ptr = ptr + 1;
@@ -89,9 +89,9 @@ int getword(char w[WORD])
 //return 1 if str2 is in str1, else return 0
 int substring(char *str1, char *str2)
 {
-    while (*str1 != ' ' && *str1 != '\t' && *str1 != '\n' && *str1 != '\0')
+    while (*str1 != ' ' && *str1 != '\t' && *str1 != '\n' && *str1 != '\0'&& *ptr != '\r')
     {
-        if (*str2 == ' ' || *str2 == '\t' || *str2 == '\n' || *str2 == '\0')
+        if (*str2 == ' ' || *str2 == '\t' || *str2 == '\n' || *str2 == '\0' || *ptr == '\r')
         {
             return 1;
         }
@@ -102,7 +102,7 @@ int substring(char *str1, char *str2)
         str1 = str1 + 1;
     }
     //edge case
-    if (*str2 == ' ' || *str2 == '\t' || *str2 == '\n' || *str2 == '\0'||*str2 == "")
+    if (*str2 == ' ' || *str2 == '\t' || *str2 == '\n' || *str2 == '\0'||*str2 == "" || *ptr == '\r')
     {
         return 1;
     }
@@ -111,7 +111,7 @@ int substring(char *str1, char *str2)
 char* HeyWord(char *str){
     char word [WORD] = {0};
     int index = 0;
-    while(*str != '\n' && *str != '\t' && *str != ' ' && *str != '\0')
+    while(*str != '\n' && *str != '\t' && *str != ' ' && *str != '\0' && *ptr != '\r')
     {
         word[index] = *str;
         str = str + 1;
@@ -130,7 +130,7 @@ char* HeyWord(char *str){
 char* HeyLine(char *str){
     char line [LINE]  = {0};
     int index = 0;
-    while(*str != '\n'){
+    while(*str != '\n' && *ptr != '\r'){
         line[index] = *str;
         str = str + 1;
         index = index + 1;
@@ -147,9 +147,9 @@ char* HeyLine(char *str){
 }
 int checkMyWords(char *str, char *word){
     int index = 0;
-    while ( *str != '\n'&&index<LINE+1)
+    while ( *str != '\n'&&index<LINE+1 && *ptr != '\r')
     {
-        if(*str == '\t' || *str == ' ' || *str == '\0'){
+        if(*str == '\t' || *str == ' ' || *str == '\0' || *ptr == '\r'){
             str = str + 1;
         }else{
             char* wordInStr = HeyWord(str);
@@ -179,9 +179,9 @@ void print_lines(char *str, char *word) {
 void print_similar_words2(char* str, char *word){
 
     int index = 0;
-    while ( *str != '\n'&&index<LINE+1)
+    while ( *str != '\n'&&index<LINE+1 && *ptr != '\r')
     {
-        if(*str == '\t' || *str == ' ' || *str == '\0'){
+        if(*str == '\t' || *str == ' ' || *str == '\0' || *ptr == '\r'){
             str = str + 1;
         }else{
             char* wordInStr = HeyWord(str);
